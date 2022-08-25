@@ -1,7 +1,13 @@
 const translator = require('./translator');
+const microCors = require('micro-cors');
 const {send} = require('micro');
 
-module.exports = async (req, res) => {
+cors = microCors({
+    allowMethods: ['GET'],
+    allowCredentials: false,
+});
+
+const handler = async (req, res) => {
     if (req.url === '/') {
         return send(res, 500, {
             error: true,
@@ -26,3 +32,5 @@ module.exports = async (req, res) => {
         return send(res, 200, translated);
     }
 };
+
+module.exports = cors(handler);
