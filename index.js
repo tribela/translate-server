@@ -1,11 +1,12 @@
 const translator = require('./translator');
-const microCors = require('micro-cors');
+const corsWrapper = require('./cors');
 const {send} = require('micro');
 
-cors = microCors({
-    allowMethods: ['GET'],
+const cors = corsWrapper({
+    allowMethods: ['GET', 'OPTIONS'],
     allowCredentials: false,
-});
+    origin: ['qdon.space', 'beta.qdon.space'],
+})
 
 const handler = async (req, res) => {
     if (req.url === '/') {

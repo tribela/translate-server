@@ -11,8 +11,7 @@
   "author": "tomo@uchuu.io",
   "dependencies": {
     "@k3rn31p4nic/google-translate-api": "jqlu/google-translate-api#patch-1",
-    "micro": "^9.3.3",
-    "micro-cors": "^0.1.1"
+    "micro": "^9.3.3"
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
