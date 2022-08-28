@@ -30,9 +30,11 @@ module.exports = (options = {}) => handler => (req, res, ...restArgs) => {
         return
     }
 
+    const originHost = new URL(req.headers.origin).hostname;
+
     for (const originItem of origin) {
-        if (req.headers.origin === originItem) {
-            res.setHeader('Access-Control-Allow-Origin', originItem);
+        if (originHost === originItem) {
+            res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
             break;
         }
     }
