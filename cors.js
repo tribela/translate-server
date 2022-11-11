@@ -33,6 +33,10 @@ module.exports = (options = {}) => handler => (req, res, ...restArgs) => {
         return
     }
 
+    if (req.headers.origin === undefined) {
+        return handler(req, res, ...restArgs);
+    }
+
     let originHost;
     try {
         originHost = new URL(req.headers.origin).hostname;
