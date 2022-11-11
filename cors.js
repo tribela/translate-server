@@ -1,3 +1,6 @@
+const {send} = require('micro');
+
+
 const DEFAULT_ALLOW_METHODS = [
     'GET',
     'POST',
@@ -30,7 +33,15 @@ module.exports = (options = {}) => handler => (req, res, ...restArgs) => {
         return
     }
 
-    const originHost = new URL(req.headers.origin).hostname;
+    let originHost;
+    try {
+        originHost = new URL(req.headers.origin).hostname;
+    } catch (e) {
+        return send(res, 403, {
+            error: true,
+            message: 'Invalid origin',
+        });
+    }
 
     for (const originItem of origin) {
         if (originHost === originItem) {
