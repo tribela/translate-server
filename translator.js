@@ -5,7 +5,8 @@ module.exports = async function translator(text, language) {
         translate(text, {to: language})
             .then(resp => {
                 const resJson = {
-                    text: resp.text
+                    text: resp.text,
+                    lang: resp.from.language.iso,
                 };
                 resolve(resJson);
             }).catch(err => {
